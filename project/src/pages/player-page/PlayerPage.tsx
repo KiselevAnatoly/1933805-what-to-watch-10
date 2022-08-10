@@ -1,20 +1,20 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { Film } from '../../types/films';
-
-type PlayerPageProps = {
-  films: Film[];
-}
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { getFilm } from '../../utils/utils';
 
 
-function PlayerPage({ films }: PlayerPageProps): JSX.Element {
+function PlayerPage(): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
-  const film = films.find((filmA) => String(filmA.id) === params.id) as Film;
+  const film = getFilm(params.id as string);
 
+  if (!film) {
+    return <Navigate to={'*'} />;
+  }
   const onExitButtonClickHandler = () => {
     const path = `/films/${film.id}`;
     navigate(path);
   };
+
   return (
     <body>
       <div className="visually-hidden">
@@ -50,7 +50,6 @@ function PlayerPage({ films }: PlayerPageProps): JSX.Element {
         <video src={film.previewVideoLink} className="player__video" poster={film.previewImage}></video>
 
         <button type="button" className="player__exit" onClick={onExitButtonClickHandler}>Exit</button>
-
 
         <div className="player__controls">
           <div className="player__controls-row">

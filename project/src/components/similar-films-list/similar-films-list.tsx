@@ -5,11 +5,11 @@ type FilmListProps = {
   films: Film[];
 }
 
-function FilmsList({ films }: FilmListProps): JSX.Element {
+function SimilarFilmsList({ films }: FilmListProps): JSX.Element {
   const filmsList =
-  films.map((film, index) => (
-    <FilmCard key={film.id} film={film} index={index} />
-  ));
+    films.map((film, index) => (
+      <FilmCard key={film.id} film={film} index={index} />
+    ));
 
   return (
     <div className="catalog__films-list">
@@ -18,4 +18,4 @@ function FilmsList({ films }: FilmListProps): JSX.Element {
   );
 }
 
-export default FilmsList;
+export default SimilarFilmsList;
