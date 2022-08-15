@@ -8,18 +8,21 @@ import PlayerPage from '../../pages/player-page/PlayerPage';
 import EmptyPage from '../../pages/empty-page/EmptyPage';
 import PrivateRoute from '../private-route/PrivateRoute';
 import AddReviewPage from '../../pages/add-review-page/AddReviewPage';
+import { useAppSelector } from '../../hooks/useDispatch';
+import LoadingPage from '../../pages/loading-page/loading-page';
 
-type MainPageProps = {
-  title: string;
-  genre: string;
-  releaseDate: number;
-}
-function App({ title, genre, releaseDate, }: MainPageProps): JSX.Element {
+function App(): JSX.Element {
+  const { isDataLoaded } = useAppSelector((state) => state);
+
+  if (isDataLoaded) {
+    return <LoadingPage />;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main}
-          element={<MainPage title={title} genre={genre} releaseDate={releaseDate} />}
+          element={<MainPage />}
         />
         <Route path={AppRoute.SignIn} element={<LoginPage />} />
         <Route path={AppRoute.MyList}
