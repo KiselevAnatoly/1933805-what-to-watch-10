@@ -1,6 +1,5 @@
 import { Tab } from '../constants';
 import { Film } from '../types/films';
-import { FILMS } from '../mocks/films';
 
 export const getTab = () => {
   const queryParams = (new URL(document.location.href)).searchParams;
@@ -10,5 +9,3 @@ export const getTab = () => {
 export const getGenres = (filmList: Film[]): string[] =>
   [...new Set(filmList.map((film) => film.genre))];
 
-export const getFilm = (id: string) =>
-  FILMS.find((item) => item.id === parseInt(id, 10));
