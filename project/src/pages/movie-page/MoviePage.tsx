@@ -1,16 +1,14 @@
 import SimilarFilms from '../../components/similar-films/similar-films';
 import Footer from '../../components/footer/footer';
-import Logo from '../../components/logo/logo';
 import { useParams, useNavigate, Link, } from 'react-router-dom';
 import Overview from '../../components/overview/Overview';
 import Details from '../../components/details/Details';
 import Reviews from '../../components/reviews/Reviews';
-import { Tab } from '../../constants';
+import { Tab, MAX_SIMILAR_FILMS_COUNT } from '../../constants';
 import { getTab } from '../../utils/utils';
 import Tabs from '../../components/tabs/tabs';
 import { useAppSelector } from '../../hooks/useDispatch';
-
-const MAX_SIMILAR_FILMS_COUNT = 4;
+import Header from '../../components/header/header';
 
 
 function MoviePage(): JSX.Element {
@@ -38,7 +36,9 @@ function MoviePage(): JSX.Element {
   };
 
   return (
-    <body>
+
+    <>
+
       <section className="film-card film-card--full" style={bckgColor}>
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -47,20 +47,7 @@ function MoviePage(): JSX.Element {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header film-card__head">
-            <Logo />
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href="#section" className="user-block__link">Sign out</a>
-              </li>
-            </ul>
-          </header>
+          <Header />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -124,7 +111,7 @@ function MoviePage(): JSX.Element {
 
         <Footer />
       </div>
-    </body >
+    </>
   );
 }
 
