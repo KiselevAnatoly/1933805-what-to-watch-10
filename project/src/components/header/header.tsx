@@ -4,6 +4,7 @@ import { AuthorizationStatus } from '../../constants';
 import { useAppSelector, useAppDispatch } from '../../hooks/useDispatch';
 import { logoutAction } from '../../store/api-actions';
 import className from 'classnames';
+import { selectAuth } from '../../store/user-process/selectors';
 
 
 type HeaderProps = {
@@ -12,7 +13,7 @@ type HeaderProps = {
 }
 
 function Header({ isMyList, favoriteCount }: HeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   return (

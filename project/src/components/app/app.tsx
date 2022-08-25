@@ -10,11 +10,14 @@ import PrivateRoute from '../private-route/PrivateRoute';
 import AddReviewPage from '../../pages/add-review-page/AddReviewPage';
 import { useAppSelector } from '../../hooks/useDispatch';
 import LoadingPage from '../../pages/loading-page/loading-page';
+import { selectLoadingDataStatus } from '../../store/films-process/selectors';
+import { selectAuth } from '../../store/user-process/selectors';
 
 function App(): JSX.Element {
-  const { isDataLoaded , authorizationStatus} = useAppSelector((state) => state);
+  const isDataLoaded = useAppSelector(selectLoadingDataStatus);
+  const authorizationStatus = useAppSelector(selectAuth);
 
-  if (!isDataLoaded) {
+  if (isDataLoaded) {
     return <LoadingPage />;
   }
 
