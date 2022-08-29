@@ -4,15 +4,15 @@ import ShowMoreButton from '../show-more-button/show-more-button';
 import { CARDS_PER_STEP } from '../../constants';
 import { showMore } from '../../store/actions';
 import { Film } from '../../types/films';
-import { selectGenre, selectRenderedFilmCount } from '../../store/films-process/selectors';
+import { getGenre, getRenderedFilmCount } from '../../store/films-process/selectors';
 import { useMemo } from 'react';
 
 function FilmsListMain({ films }: { films: Film[] }): JSX.Element {
   const dispatch = useAppDispatch();
-  const selectedGenre = useAppSelector(selectGenre);
-  const renderedFilmCount = useAppSelector(selectRenderedFilmCount);
+  const selectedGenre = useAppSelector(getGenre);
+  const renderedFilmCount = useAppSelector(getRenderedFilmCount);
   const sortedFilms = films.filter((film) => selectedGenre === 'All genres' ? films : film.genre === selectedGenre);
-  const onShowMoreBtnClick = () => {
+  const handleOnShowMoreBtnClick = () => {
     dispatch(showMore(renderedFilmCount + CARDS_PER_STEP));
   };
 
@@ -22,7 +22,6 @@ function FilmsListMain({ films }: { films: Film[] }): JSX.Element {
     sortedFilms?.slice(0, renderedFilmCount).map((film, index) => (
       <FilmCard key={film.id}
         film={film}
-        index={index}
       />
     )), [renderedFilmCount, sortedFilms]);
 
@@ -33,7 +32,7 @@ function FilmsListMain({ films }: { films: Film[] }): JSX.Element {
       </div>
       {
         isShowBtn &&
-        <ShowMoreButton onClick={onShowMoreBtnClick} />
+        <ShowMoreButton onClick={handleOnShowMoreBtnClick} />
       }
     </>
   );

@@ -4,7 +4,7 @@ import { AuthorizationStatus, AppRoute } from '../../constants';
 import { useAppSelector, useAppDispatch } from '../../hooks/useDispatch';
 import { logoutAction } from '../../store/api-actions';
 import className from 'classnames';
-import { selectAuth, selectAvatar } from '../../store/user-process/selectors';
+import { getAuth, getAvatar } from '../../store/user-process/selectors';
 
 
 type HeaderProps = {
@@ -13,8 +13,8 @@ type HeaderProps = {
 }
 
 function Header({ isMyList, favoriteCount }: HeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector(selectAuth);
-  const avatarUrl = useAppSelector(selectAvatar);
+  const authorizationStatus = useAppSelector(getAuth);
+  const avatarUrl = useAppSelector(getAvatar);
   const dispatch = useAppDispatch();
 
   return (

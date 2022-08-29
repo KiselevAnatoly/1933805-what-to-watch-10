@@ -1,17 +1,17 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/useDispatch';
 import { changeGenre } from '../../store/actions';
 import GenreButton from '../genre-button/genre-button';
-import { selectFilmGenres, selectGenre } from '../../store/films-process/selectors';
+import { getFilmGenres, getGenre } from '../../store/films-process/selectors';
 import { MAX_GENRES_COUNT } from '../../constants';
 
 
 function GenreTabs(): JSX.Element {
-  const selectedGenre = useAppSelector(selectGenre);
-  const genres = useAppSelector(selectFilmGenres);
+  const selectedGenre = useAppSelector(getGenre );
+  const genres = useAppSelector(getFilmGenres);
 
   const dispatch = useAppDispatch();
 
-  const onTabClickHandler = (evt: React.MouseEvent) => {
+  const handleOnTabClick = (evt: React.MouseEvent) => {
     const clickedGenre = evt.currentTarget.textContent;
     if (clickedGenre !== null) {
       dispatch(changeGenre(clickedGenre));
@@ -20,7 +20,7 @@ function GenreTabs(): JSX.Element {
 
   const generateGenreTab =
     genres.map((genre) => (
-      <GenreButton key={genre} genre={genre} isActive={selectedGenre === genre} onClick={onTabClickHandler} />
+      <GenreButton key={genre} genre={genre} isActive={selectedGenre === genre} onClick={handleOnTabClick} />
     )).slice(0, MAX_GENRES_COUNT);
 
 

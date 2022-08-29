@@ -32,7 +32,6 @@ export enum APIRoute {
 }
 export enum NameSpace {
   User = 'USER',
-  PromoFilm = 'PROMO_FILM',
   Films = 'FILMS',
   Film = 'FILM',
   AddReview = 'ADD_REVIEW',
@@ -59,4 +58,4 @@ export const MAX_GENRES_COUNT = 10;
 export const PLAY_TIMEOUT = 1000;
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const DEFALUT_RATING_VALUE = 0;
-//jbghgh
+
