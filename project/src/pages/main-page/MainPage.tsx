@@ -16,7 +16,7 @@ function MainPage(): JSX.Element {
   const promoFilm = useAppSelector(selectPromoFilm);
 
   const playButtonClickHandler = () => {
-    const path = '/player/1';
+    const path = `/player/${promoFilm.id}`;
     navigate(path);
   };
 
