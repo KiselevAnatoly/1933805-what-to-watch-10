@@ -6,6 +6,7 @@ export const AppRoute = {
   Main: '/',
   AddReview: '/films/:id/review',
   Player: '/player/:id',
+  ServerError: '/servererror',
 };
 
 export enum AuthorizationStatus {
@@ -40,6 +41,16 @@ export enum PlayerProgress {
   Start = 0,
   End = 100,
 }
+export enum CommentLength {
+  Min = 50,
+  Max = 400,
+}
+
+export enum ErrorMessage {
+  SignInValidate = 'We can’t recognize this email and password combination. Please try again.',
+  IncorrectEmail = 'Please enter a valid email address',
+  ServerError = 'Unknown server error'
+}
 
 export const DEFAULT_GENRE = 'All genres';
 export const DEFAULT_SHOW_CARDS = 8;
@@ -48,3 +59,4 @@ export const MAX_GENRES_COUNT = 10;
 export const PLAY_TIMEOUT = 1000;
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const DEFALUT_RATING_VALUE = 0;
+//jbghgh
