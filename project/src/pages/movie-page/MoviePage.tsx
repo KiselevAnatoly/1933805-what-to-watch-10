@@ -14,26 +14,30 @@ import { useEffect } from 'react';
 import AddReviewButton from '../../components/add-review-btn/add-review-btn';
 import { AuthorizationStatus } from '../../constants';
 import EmptyPage from '../empty-page/EmptyPage';
-import { selectAuth } from '../../store/user-process/selectors';
-import { selectFilm, selectComments, selectSimilarFilms } from '../../store/film-process/selectors';
+import { getAuth } from '../../store/user-process/selectors';
+import { getFilm, getComments, getSimilarFilms } from '../../store/film-process/selectors';
 import MyListBtn from '../../components/my-list-btn/my-list-btn';
 
 function MoviePage(): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector(selectAuth);
-  const filmComments = useAppSelector(selectComments);
-  const film = useAppSelector(selectFilm);
-  const similarFilms = useAppSelector(selectSimilarFilms);
+  const authStatus = useAppSelector(getAuth);
+  const filmComments = useAppSelector(getComments);
+  const film = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const filmID = String(film.id);
+
   useEffect(() => {
-    dispatch(fetchFilm(params.id));
-    dispatch(fetchSimilarFilms(params.id));
-    dispatch(fetchFilmComments(params.id));
+    if (params.id) {
+      dispatch(fetchFilm(params.id));
+      dispatch(fetchSimilarFilms(params.id));
+      dispatch(fetchFilmComments(params.id));
+    }
   }, [dispatch, params.id]);
 
 
-  const onPlayButtonClickHandler = () => {
+  const hanldleOnPlayButtonClick = () => {
     const path = `/player/${film.id}`;
     navigate(path);
   };
@@ -71,13 +75,13 @@ function MoviePage(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={onPlayButtonClickHandler}>
+                <button className="btn btn--play film-card__button" type="button" onClick={hanldleOnPlayButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <MyListBtn />
+                <MyListBtn filmID={filmID} />
                 {authStatus === AuthorizationStatus.Auth ? <AddReviewButton id={film.id} /> : null}
               </div>
             </div>
