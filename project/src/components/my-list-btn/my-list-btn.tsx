@@ -33,7 +33,9 @@ function MyListBtn({ filmID }: MyListBtnProps): JSX.Element {
     navigate(path);
   };
   useEffect(() => {
-    dispatch(fetchFavorites());
+    if (authStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavorites());
+    }
   }, [filmStatus, dispatch]);
   const handleClickBtn = () => {
     if (authStatus === AuthorizationStatus.Auth) {
