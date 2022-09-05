@@ -36,7 +36,7 @@ function MyListBtn({ filmID }: MyListBtnProps): JSX.Element {
     if (authStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavorites());
     }
-  }, [filmStatus, dispatch]);
+  }, [filmStatus, dispatch, authStatus]);
   const handleClickBtn = () => {
     if (authStatus === AuthorizationStatus.Auth) {
       return addToFavorites;
